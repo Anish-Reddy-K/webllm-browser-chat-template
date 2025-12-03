@@ -1,34 +1,34 @@
 # WebLLM Chat Widget
 
-This repository provides a basic, embeddable chat widget leveraging MLC AI's [WebLLM project](https://webllm.mlc.ai/) to run large language models (LLMs) directly in the browser. Our contribution simplifies its integration, offers robust cache management, and externalizes configurations for a developer-friendly and "Good Citizen" application experience.
+This is my repository, providing a basic, embeddable chat widget leveraging MLC AI's [WebLLM project](https://webllm.mlc.ai/) to run large language models (LLMs) directly in the browser. My contribution simplifies its integration, offers robust cache management, and externalizes configurations for a developer-friendly and "Good Citizen" application experience.
 
 ## Features
 
--   **Client-Side LLM:** Runs `Llama-3.2-1B-Instruct-q4f16_1-MLC` (or other configurable models) entirely within the user's browser, eliminating server-side inference costs and enhancing privacy.
--   **Persistent Caching:** Model weights are cached in the browser's Cache Storage for significantly faster loading on subsequent visits.
+-   **Client-Side LLM:** Runs `Llama-3.2-1B-Instruct-q4f16_1-MLC` (or other configurable models) entirely within your browser, eliminating server-side inference costs and enhancing privacy.
+-   **Persistent Caching:** Model weights are cached in your browser's Cache Storage for significantly faster loading on subsequent visits.
 -   **Configurable:** Model ID, cache name, and system prompt are easily adjustable via the external `config.json` file.
 -   **Robust Cache Management:**
     -   **Cache Cleanup Button:** A user-facing button allows explicit clearing of the model cache.
-    -   **Best-Effort Automatic Cleanup:** Attempts to clear the model cache when the user navigates away or closes the page (`window.onbeforeunload`), ensuring the application is a "Good Citizen" by not leaving large files behind indefinitely (though this is browser-dependent).
+    -   **Best-Effort Automatic Cleanup:** Attempts to clear the model cache when you navigate away or close the page (`window.onbeforeunload`), ensuring the application is a "Good Citizen" by not leaving large files behind indefinitely (though this is browser-dependent).
 -   **Minimalist Integration:** Provides a basic HTML and JavaScript structure designed for easy embedding into any website.
--   **Dynamic Textarea:** The input textarea expands automatically as the user types.
+-   **Dynamic Textarea:** The input textarea expands automatically as you type.
 -   **Streaming Responses:** AI responses are streamed for a more interactive chat experience.
 
 ## How it Works (Conceptual)
 
 This widget builds upon the powerful [WebLLM library by MLC AI](https://webllm.mlc.ai/) to compile LLMs into WebAssembly and run them directly in the browser using WebGPU or WebGL.
 
-Our work specifically focuses on:
+My work specifically focuses on:
 
--   **Simplifying Configuration:** By externalizing `MODEL_ID`, `CACHE_NAME`, and `SYSTEM_PROMPT` into `config.json`, we've made the widget highly customizable without requiring changes to the JavaScript logic.
+-   **Simplifying Configuration:** By externalizing `MODEL_ID`, `CACHE_NAME`, and `SYSTEM_PROMPT` into `config.json`, I've made the widget highly customizable without requiring changes to the JavaScript logic.
 -   **Streamlining Initialization:** The `webllm_widget.js` handles asynchronously loading `config.json` before initializing the WebLLM engine, ensuring a smooth setup process.
--   **Implementing Robust Cache Management:** We added explicit control over the large model cache in Cache Storage, providing both manual and best-effort automatic cleanup mechanisms.
+-   **Implementing Robust Cache Management:** I added explicit control over the large model cache in Cache Storage, providing both manual and best-effort automatic cleanup mechanisms.
 
 1.  **Configuration Loading:** On page load, `webllm_widget.js` fetches `config.json` asynchronously to retrieve dynamic parameters.
 2.  **Model Initialization:** `CreateMLCEngine` is called to initialize the LLM using the configured `MODEL_ID`. If the model isn't present in Cache Storage, it downloads the ~880MB weights. If cached, it loads much faster.
-3.  **Chat Interaction:** User input is sent to the `engine.chat.completions.create` method, and the AI's streaming response is displayed.
+3.  **Chat Interaction:** Your input is sent to the `engine.chat.completions.create` method, and the AI's streaming response is displayed.
 4.  **Cache Management:**
-    *   **Persistence:** The `useIndexedDBCache: true` option (as part of `CreateMLCEngine` options) results in model weights being stored persistently in the browser's **Cache Storage** (our investigation during development confirmed it uses Cache Storage rather than IndexedDB directly for these weights).
+    *   **Persistence:** The `useIndexedDBCache: true` option (as part of `CreateMLCEngine` options) results in model weights being stored persistently in the browser's **Cache Storage** (my investigation during development confirmed it uses Cache Storage rather than IndexedDB directly for these weights).
     *   **Manual Clear:** The "Clear Cache" button uses the browser's `caches.delete(CACHE_NAME)` API to remove the model weights.
     *   **Automatic Cleanup:** `window.onbeforeunload` also attempts `caches.delete(CACHE_NAME)`. Due to inherent browser limitations on asynchronous operations during page unload, this is a "best-effort" attempt and not guaranteed to always complete for large files.
 
