@@ -1,6 +1,6 @@
 # WebLLM Chat Widget
 
-This is my repository, providing a basic, embeddable chat widget leveraging MLC AI's [WebLLM project](https://webllm.mlc.ai/) to run large language models (LLMs) directly in the browser. My contribution simplifies its integration, offers robust cache management, and externalizes configurations for a developer-friendly and "Good Citizen" application experience.
+This repository provides a basic, embeddable chat widget leveraging MLC AI's [WebLLM project](https://webllm.mlc.ai/) to run large language models (LLMs) directly in the browser. This repo simplifies its integration, offers robust cache management, and externalizes configurations for a developer-friendly and "Good Citizen" application experience.
 
 ## Features
 
