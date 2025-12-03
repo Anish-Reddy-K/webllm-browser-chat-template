@@ -54,8 +54,8 @@ It simplifies the complexities of WebLLM setup, making the cutting-edge technolo
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
-    cd webllm-chat-widget # or your chosen repo name
+    git clone https://github.com/Anish-Reddy-K/webllm-browser-chat-template.git
+    cd webllm-browser-chat-template
     ```
 2.  **Place files:** Ensure `index.html`, `config.json`, and `webllm_widget.js` are in the same directory or adjust paths accordingly.
 3.  **Serve the files:**
