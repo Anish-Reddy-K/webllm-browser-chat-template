@@ -101,7 +101,3 @@ This project is made possible by the incredible work of the [MLC AI WebLLM team]
 ## Contributing
 
 Feel free to open issues or submit pull requests.
-
-## License
-
-This project is open-source. (Consider adding a specific license file like MIT or Apache 2.0).
